@@ -22,9 +22,6 @@ def test_get_leap_years():
     assert get_leap_years(2001,2003) == []
 
 
-test_get_leap_years()
-
-
 def get_perfect_squares(start: int, end: int) -> list[int]:
     '''
     Returneaza toate patratele cuprinse intre 2 numere date
@@ -48,17 +45,42 @@ def test_get_perfect_squares():
     assert get_perfect_squares(1,16) == [1,4,9,16]
 
 
-test_get_perfect_squares()
+def is_palindrome(n) -> bool:
+    '''
+    Determina daca un numar este palindrom
+    :param n: numar intreg
+    :return: True sau False
+    '''
+    copie = n
+    invers=0
+    while copie:
+        invers=invers*10+copie%10
+        copie=copie//10
+    if invers == n:
+        return True
+    else:
+        return False
+
+
+def test_is_palindrome():
+    assert is_palindrome(233) == False
+    assert is_palindrome(123321) == True
+    assert is_palindrome(5) == True
+    assert is_palindrome(2145126) == False
 
 
 def main():
     '''
     Meniu
     '''
+    test_get_leap_years()
+    test_get_perfect_squares()
+    test_is_palindrome()
     should_Run=True
     while (should_Run==True):
         print("Optiunea 1: Afiseaza toti anii bisecti intre doi ani dati.")
         print("Optiunea 2: Afiseaza toate patratele perfecte dintr-un interval inchis dat.")
+        print("Optiunea 3: Determina daca un numar este palindrom.")
         print("Optiunea x: Iesire")
         optiune = input("Alege o optiune de mai sus: ")
         if optiune == "1":
@@ -79,10 +101,14 @@ def main():
             else:
                 print("Patratele perfecte cuprinse in [",primul_numar, ",", ultimul_numar,"] sunt: ")
                 print(get_perfect_squares(primul_numar,ultimul_numar))
+        elif optiune == "3":
+            n = int(input("Introdu numarul pe care doresti sa-l verifici daca este palindrom: "))
+            print(is_palindrome(n))
         elif optiune=="x":
             should_Run=False
         else:
             print("Ai introdus o optiune GRESITA!!! Te rog alege alta din cele prezentate mai sus.")
 
 
-main()
+if __name__ == '__main__':
+    main()
